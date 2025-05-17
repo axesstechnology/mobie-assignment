@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -11,12 +12,18 @@ export default function SignUpForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+  };
+
+  const handleLoginClick = () => {
+    navigate('/'); // change '/login' to your actual login route if different
   };
 
   return (
@@ -120,6 +127,16 @@ export default function SignUpForm() {
               .
             </label>
           </div>
+          <p className="mt-4 text-center text-sm text-gray-600">
+        Already a user?{' '}
+        <button
+          onClick={handleLoginClick}
+          className="text-blue-600 hover:underline"
+          type="button"
+        >
+          Login
+        </button>
+      </p>
         </form>
       </div>
     </div>
