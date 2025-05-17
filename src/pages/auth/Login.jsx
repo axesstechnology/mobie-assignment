@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "../../assets/Login.jpg";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import SignUpForm from "../auth/Signup";
 
 export default function LoginForm() {
@@ -10,10 +10,22 @@ export default function LoginForm() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate('/search');
+  };
+
+  const handleChat = () => {
+    navigate('/chats');
+  };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
@@ -60,7 +72,7 @@ export default function LoginForm() {
             </a>
           </div>
 
-          <button
+          <button onClick={handleLogin}
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
           >
@@ -73,6 +85,13 @@ export default function LoginForm() {
               Register now
             </Link>
           </p>
+
+          <p className="text-sm text-center text-gray-600">
+            Interested?{" "}
+            <Link to="/subscription" className="text-blue-600 font-medium">
+              Subscribe now
+            </Link>
+          </p>
         </form>
 
         <div className="flex items-center my-4">
@@ -83,7 +102,7 @@ export default function LoginForm() {
 
         <div className="flex justify-center space-x-4">
           <button className="bg-red-600 text-white rounded-full p-2">G</button>
-          <button className="bg-black text-white rounded-full p-2">●</button>
+          <button onClick={handleChat} className="bg-black text-white rounded-full p-2">Chats</button>
           <button className="bg-blue-600 text-white rounded-full p-2">f</button>
         </div>
       </div>
